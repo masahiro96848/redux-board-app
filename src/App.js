@@ -1,7 +1,33 @@
 import './App.css'
+import { useSelector } from 'react-redux'
 
 function App() {
-    return <div className="App"></div>
+    const postList = useSelector((state) => state.posts.value)
+
+    return (
+        <>
+            <div className="App">
+                <div>
+                    <h1>React-Redux掲示板</h1>
+                </div>
+                <div className="addPost">
+                    <input type="text" placeholder="お名前" />
+                    <input type="text" placeholder="投稿内容" />
+                    <button>投稿</button>
+                    <hr />
+                </div>
+                <div className="displayPosts">
+                    {postList.map((post) => (
+                        <div key={post.id} className="post">
+                            <h1>{post.name}</h1>
+                            <h1 className="postContent">{post.content}</h1>
+                            <button>削除</button>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </>
+    )
 }
 
 export default App
